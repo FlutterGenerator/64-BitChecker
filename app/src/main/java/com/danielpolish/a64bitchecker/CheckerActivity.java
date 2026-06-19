@@ -15,17 +15,17 @@ public class CheckerActivity extends AppCompatActivity {
     private TextView ResultText;
 
     private void Check() {
-        int i;
+        boolean is64Bit;
         CharSequence stringBuilder;
 
         if (VERSION.SDK_INT >= 21) {
             String str = "";
-            i = 0;
+            is64Bit = false;
 
             for (int i2 = 0; i2 < Build.SUPPORTED_ABIS.length; i2++) {
                 StringBuilder stringBuilder2;
 
-                i |= Build.SUPPORTED_ABIS[i2].contains("64");
+                is64Bit |= Build.SUPPORTED_ABIS[i2].contains("64");
 
                 if (i2 > 0) {
                     stringBuilder2 = new StringBuilder();
@@ -47,10 +47,10 @@ public class CheckerActivity extends AppCompatActivity {
             stringBuilder = stringBuilder3.toString();
         } else {
             stringBuilder = "(Android versions before 5.0 do not have 64-bit support.)";
-            i = 0;
+            is64Bit = false;
         }
 
-        CharSequence charSequence = i != 0
+        CharSequence charSequence = is64Bit
                 ? "This device has a 64-bit OS."
                 : "This device has a 32-bit OS.";
 
